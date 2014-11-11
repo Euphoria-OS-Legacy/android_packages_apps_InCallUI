@@ -266,6 +266,8 @@ public class CallButtonPresenter extends Presenter<CallButtonPresenter.CallButto
         }
 
         videoCall.sendSessionModifyRequest(videoProfile);
+
+        mCall.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
     }
 
     /**

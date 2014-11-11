@@ -83,9 +83,7 @@ public class InCallApp extends Application {
             } else if (action.equals(ACTION_HANG_UP_ONGOING_CALL)) {
                 InCallPresenter.getInstance().hangUpOngoingCall(context);
             } else if (action.equals(ACTION_ACCEPT_VIDEO_UPGRADE_REQUEST)) {
-                //TODO: Change calltype after adding support for TX and RX
-                InCallPresenter.getInstance().acceptUpgradeRequest(
-                        VideoProfile.VideoState.BIDIRECTIONAL, context);
+                InCallPresenter.getInstance().acceptUpgradeRequest(context);
             } else if (action.equals(ACTION_DECLINE_VIDEO_UPGRADE_REQUEST)) {
                 InCallPresenter.getInstance().declineUpgradeRequest(context);
             }

@@ -350,8 +350,8 @@ public class AnswerFragment extends BaseFragment<AnswerPresenter, AnswerPresente
     }
 
     @Override
-    public void onDecline(Context context) {
-        getPresenter().onDecline(context);
+    public void onDecline() {
+        getPresenter().onDecline();
     }
 
     @Override

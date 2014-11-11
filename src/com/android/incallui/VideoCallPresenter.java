@@ -22,7 +22,6 @@ import android.graphics.Point;
 import android.os.Handler;
 import android.telecom.AudioState;
 import android.telecom.CameraCapabilities;
-import android.telecom.Connection.VideoProvider;
 import android.telecom.InCallService.VideoCall;
 import android.telecom.VideoProfile;
 import android.view.Surface;
@@ -703,27 +702,20 @@ public class VideoCallPresenter extends Presenter<VideoCallPresenter.VideoCallUi
     }
 
     @Override
-    public void onUpgradeToVideoFail(int status, Call call) {
-        Log.d(this, "onUpgradeToVideoFail call=" + call);
+    public void onUpgradeToVideoFail(Call call) {
         if (mPrimaryCall == null || !Call.areSame(mPrimaryCall, call)) {
             return;
         }
 
-        if (status == VideoProvider.SESSION_MODIFY_REQUEST_TIMED_OUT) {
-            mPrimaryCall.setSessionModificationState(
-                    Call.SessionModificationState.UPGRADE_TO_VIDEO_REQUEST_TIMED_OUT);
-        } else {
-            call.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
+        call.setSessionModificationState(Call.SessionModificationState.REQUEST_FAILED);
 
-            // Start handler to change state from REQUEST_FAILED to NO_REQUEST after an interval.
-            mSessionModificationResetHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mPrimaryCall
-                            .setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
-                }
-            }, SESSION_MODIFICATION_RESET_DELAY_MS);
-        }
+        // Start handler to change state from REQUEST_FAILED to NO_REQUEST after an interval.
+        mSessionModificationResetHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPrimaryCall.setSessionModificationState(Call.SessionModificationState.NO_REQUEST);
+            }
+        }, SESSION_MODIFICATION_RESET_DELAY_MS);
     }
 
     @Override

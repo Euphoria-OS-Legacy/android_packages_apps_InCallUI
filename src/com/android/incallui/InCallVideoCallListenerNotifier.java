@@ -149,9 +149,9 @@ public class InCallVideoCallListenerNotifier {
      *
      * @param call The call.
      */
-    public void upgradeToVideoFail(int status, Call call) {
+    public void upgradeToVideoFail(Call call) {
         for (SessionModificationListener listener : mSessionModificationListeners) {
-            listener.onUpgradeToVideoFail(status, call);
+            listener.onUpgradeToVideoFail(call);
         }
     }
 
@@ -243,7 +243,7 @@ public class InCallVideoCallListenerNotifier {
          *
          * @param call The call the request was successful for.
          */
-        public void onUpgradeToVideoFail(int status, Call call);
+        public void onUpgradeToVideoFail(Call call);
 
         /**
          * Called when a call has been downgraded to audio-only.

@@ -116,7 +116,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_decline:
-                mAnswerListener.onDecline(getContext());
+                mAnswerListener.onDecline();
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_lockscreen_text:
@@ -125,14 +125,6 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
                 break;
             case R.drawable.ic_lockscreen_answer_video:
                 mAnswerListener.onAnswer(VideoProfile.VideoState.BIDIRECTIONAL, getContext());
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_lockscreen_answer_tx_video:
-                mAnswerListener.onAnswer(VideoProfile.VideoState.TX_ENABLED, getContext());
-                mTargetTriggered = true;
-                break;
-            case R.drawable.ic_lockscreen_answer_rx_video:
-                mAnswerListener.onAnswer(VideoProfile.VideoState.RX_ENABLED, getContext());
                 mTargetTriggered = true;
                 break;
             case R.drawable.ic_toolbar_video_off:
@@ -161,7 +153,7 @@ public class GlowPadWrapper extends GlowPadView implements GlowPadView.OnTrigger
 
     public interface AnswerListener {
         void onAnswer(int videoState, Context context);
-        void onDecline(Context context);
+        void onDecline();
         void onText();
     }
 }
